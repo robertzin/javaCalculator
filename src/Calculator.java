@@ -19,7 +19,7 @@ public class Calculator {
 
     public static int isArabicOrRoman (String num) {
         try {
-            int ret = Integer.parseInt(num);
+            Integer.parseInt(num);
             return 1;
         } catch (Exception ignored) {}
         try {
