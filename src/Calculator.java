@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Calculator {
 
 
@@ -30,29 +32,34 @@ public class Calculator {
     }
 
     public static void main(String[] args) {
-        if (args.length != 3)
+        Scanner sc = new Scanner(System.in);
+        String[] line = sc.nextLine().split(" ");
+
+        if (line.length != 3)
             throw new IllegalStateException("Error! At least 3 args need to proceed :(");
+
+
         Operation op;
-        switch (args[1]) {
+        switch (line[1]) {
             case "-" -> op = Operation.SUBTRACT;
             case "+" -> op = Operation.SUM;
             case "*" -> op = Operation.MULTIPLY;
             case "/" -> op = Operation.DIVIDE;
             default -> throw new IllegalStateException("Error! Unexpected value: " + args[1]);
         }
-        System.out.println("First num: " + args[0]);
+        System.out.println("First num: " + line[0]);
         System.out.println("Operation: " + op.name());
-        System.out.println("Second num: " + args[0]);
+        System.out.println("Second num: " + line[2]);
 
-        if (isArabicOrRoman(args[0]) == 1 && isArabicOrRoman(args[2]) == 1) {
-            int num1 = Integer.parseInt(args[0]);
-            int num2 = Integer.parseInt(args[2]);
+        if (isArabicOrRoman(line[0]) == 1 && isArabicOrRoman(line[2]) == 1) {
+            int num1 = Integer.parseInt(line[0]);
+            int num2 = Integer.parseInt(line[2]);
             System.out.println("Result: " + op.action(num1, num2));
         }
-        else if (isArabicOrRoman(args[0]) == 2 && isArabicOrRoman(args[2]) == 2) {
+        else if (isArabicOrRoman(line[0]) == 2 && isArabicOrRoman(line[2]) == 2) {
             int res;
-            romanNums first = new romanNums(args[0]);
-            romanNums second = new romanNums(args[2]);
+            romanNums first = new romanNums(line[0]);
+            romanNums second = new romanNums(line[2]);
             if ((res = op.action(first.getNumIntValue(), second.getNumIntValue())) < 1)
                 throw new IllegalStateException("Error! In Roman there is no nums less than I :(");
             System.out.println("Result: " + first.parseArabicToRoman(res));
