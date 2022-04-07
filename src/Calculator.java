@@ -45,7 +45,7 @@ public class Calculator {
             case "+" -> op = Operation.SUM;
             case "*" -> op = Operation.MULTIPLY;
             case "/" -> op = Operation.DIVIDE;
-            default -> throw new IllegalStateException("Error! Unexpected value: " + args[1]);
+            default -> throw new IllegalStateException("Error! Unexpected value: " + line[1]);
         }
         System.out.println("First num: " + line[0]);
         System.out.println("Operation: " + op.name());
