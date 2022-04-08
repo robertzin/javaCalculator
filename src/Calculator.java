@@ -20,15 +20,19 @@ public class Calculator {
     }
 
     public static int isArabicOrRoman (String num) {
+        int ret = 0;
         try {
-            Integer.parseInt(num);
-            return 1;
+            int tmp = Integer.parseInt(num);
+            if (tmp <= 10)
+                ret = 1;
         } catch (Exception ignored) {}
         try {
-            romanNums.romanNumsEnum.valueOf(num);
-            return 2;
+            romanNums.romanNumsEnum tmp = romanNums.romanNumsEnum.valueOf(num);
+            if (tmp.getValue() <= 10)
+                ret = 2;
         } catch (Exception ignored) {}
-        return 0;
+//        System.out.println(num + ": " + ret);
+        return ret;
     }
 
     public static void main(String[] args) {
@@ -54,21 +58,17 @@ public class Calculator {
         if (isArabicOrRoman(line[0]) == 1 && isArabicOrRoman(line[2]) == 1) {
             int num1 = Integer.parseInt(line[0]);
             int num2 = Integer.parseInt(line[2]);
-            if (num1 > 10 || num2 > 10)
-                throw new IllegalStateException("Error! The highest value must be 10!");
             System.out.println("Result: " + op.action(num1, num2));
         }
         else if (isArabicOrRoman(line[0]) == 2 && isArabicOrRoman(line[2]) == 2) {
             int res;
             romanNums first = new romanNums(line[0]);
             romanNums second = new romanNums(line[2]);
-            if (first.getNumIntValue() > 10 || second.getNumIntValue() > 10)
-                throw new IllegalStateException("Error! The highest value must be 10!");
             if ((res = op.action(first.getNumIntValue(), second.getNumIntValue())) < 1)
                 throw new IllegalStateException("Error! In Roman there is no nums less than I :(");
             System.out.println("Result: " + first.parseArabicToRoman(res));
         }
         else
-            throw new IllegalStateException("Error! Args should be all roman or arabic :(");
+            throw new IllegalStateException("Error! Args should be all roman or arabic and less than 11:(");
     }
 }
