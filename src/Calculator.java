@@ -54,12 +54,16 @@ public class Calculator {
         if (isArabicOrRoman(line[0]) == 1 && isArabicOrRoman(line[2]) == 1) {
             int num1 = Integer.parseInt(line[0]);
             int num2 = Integer.parseInt(line[2]);
+            if (num1 > 10 || num2 > 10)
+                throw new IllegalStateException("Error! The highest value must be 10!");
             System.out.println("Result: " + op.action(num1, num2));
         }
         else if (isArabicOrRoman(line[0]) == 2 && isArabicOrRoman(line[2]) == 2) {
             int res;
             romanNums first = new romanNums(line[0]);
             romanNums second = new romanNums(line[2]);
+            if (first.getNumIntValue() > 10 || second.getNumIntValue() > 10)
+                throw new IllegalStateException("Error! The highest value must be 10!");
             if ((res = op.action(first.getNumIntValue(), second.getNumIntValue())) < 1)
                 throw new IllegalStateException("Error! In Roman there is no nums less than I :(");
             System.out.println("Result: " + first.parseArabicToRoman(res));
